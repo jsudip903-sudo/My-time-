@@ -1,0 +1,204 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="My Thoughts - Premium collection of quotes and personal reflections" />
+  <title>My Thoughts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Playfair Display', serif; }
+    body {
+      background: radial-gradient(circle at top, #1a1a1a, #000000 70%);
+      color: #ffffff;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(gold 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.05;
+  animation: moveParticles 60s linear infinite;
+  z-index: -1;
+}
+
+@keyframes moveParticles {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100px); }
+}
+
+header {
+  text-align: center;
+  padding: 90px 20px;
+  border-bottom: 2px solid gold;
+}
+
+.logo {
+  font-size: 70px;
+  font-weight: bold;
+  background: linear-gradient(90deg, gold, white, gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border: 3px solid gold;
+  display: inline-block;
+  padding: 15px 30px;
+  border-radius: 50%;
+  margin-bottom: 25px;
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 10px gold; }
+  to { box-shadow: 0 0 25px gold; }
+}
+
+header h1 {
+  font-size: 48px;
+  color: gold;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+
+.container {
+  max-width: 850px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+.quote-box {
+  background: linear-gradient(145deg, #111111, #1c1c1c);
+  padding: 40px;
+  margin: 30px 0;
+  border-radius: 20px;
+  border: 1px solid gold;
+  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.15);
+  transition: transform 0.4s ease, opacity 0.5s ease;
+  opacity: 1;
+}
+
+.quote-box.fade {
+  opacity: 0;
+}
+
+.quote-box p {
+  font-size: 26px;
+  text-align: center;
+}
+
+.author {
+  text-align: right;
+  margin-top: 20px;
+  font-style: italic;
+  color: gold;
+  font-size: 18px;
+}
+
+.input-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+textarea, input {
+  width: 100%;
+  max-width: 600px;
+  margin: 10px auto;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid gold;
+  background: #111;
+  color: white;
+  display: block;
+}
+
+button {
+  margin: 20px auto;
+  padding: 12px 30px;
+  border: 2px solid gold;
+  border-radius: 40px;
+  background: transparent;
+  color: gold;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  display: inline-block;
+}
+
+button:hover {
+  background: gold;
+  color: black;
+  box-shadow: 0 0 20px gold;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  border-top: 1px solid gold;
+  color: #aaaaaa;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+  </style>
+</head>
+<body>  <header>
+    <div class="logo">S</div>
+    <h1>My Thoughts</h1>
+    <p>Ultra Luxury Collection of Words</p>
+  </header>  <div class="container">
+    <div class="quote-box" id="quoteBox">
+      <p id="quote">"Your thoughts create your destiny."</p>
+      <div class="author" id="author">– S</div>
+    </div><div class="input-section">
+  <h2 style="color:gold; margin-bottom:15px;">Add Your Own Thought</h2>
+  <textarea id="newQuoteText" placeholder="Write your thought..."></textarea>
+  <input type="text" id="newAuthor" placeholder="Your name" />
+  <button onclick="addQuote()">Add Thought</button>
+</div>
+
+  </div>  <footer>
+    © 2026 My Thoughts | Ready for Publishing 🌍
+  </footer>  <script>
+    const quotes = [
+      { text: "Your thoughts create your destiny.", author: "S" },
+      { text: "Elegance is silent confidence.", author: "S" },
+      { text: "In darkness, gold shines brighter.", author: "S" },
+      { text: "Calm mind. Powerful life.", author: "S" },
+      { text: "Luxury is a mindset.", author: "S" }
+    ];
+
+    const quoteEl = document.getElementById("quote");
+    const authorEl = document.getElementById("author");
+    const box = document.getElementById("quoteBox");
+
+    function showQuote(index) {
+      box.classList.add("fade");
+      setTimeout(() => {
+        quoteEl.innerText = '"' + quotes[index].text + '"';
+        authorEl.innerText = '– ' + quotes[index].author;
+        box.classList.remove("fade");
+      }, 400);
+    }
+
+    function autoChange() {
+      let random = Math.floor(Math.random() * quotes.length);
+      showQuote(random);
+    }
+
+    setInterval(autoChange, 5000);
+
+    function addQuote() {
+      const text = document.getElementById("newQuoteText").value;
+      const author = document.getElementById("newAuthor").value || "S";
+
+      if (text.trim() !== "") {
+        quotes.push({ text: text, author: author });
+        document.getElementById("newQuoteText").value = "";
+        document.getElementById("newAuthor").value = "";
+        alert("Thought Added Successfully ✨");
+      }
+    }
+  </script></body>
+</html>
